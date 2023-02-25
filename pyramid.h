@@ -16,7 +16,7 @@ class Pyramid
 		T right_index(int index);
 		T parent_index(int index);
 
-		Pyramid(T* arr, int size);
+		Pyramid(int size, T ...);
 		~Pyramid();
 };
 

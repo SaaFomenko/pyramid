@@ -1,22 +1,22 @@
 #ifndef PYRAMID_H
 #define PYRAMID_H
 
-template<typename T>
 
 class Pyramid
 {
 	private:
-		T* arr;
-		int size;
+		int* arr;
+		int _size;
 
 	public:
-		T root(int index);
-		T from_index(int index);
-		T left_index(int index);
-		T right_index(int index);
-		T parent_index(int index);
+		int root();
+		int from_index(int index);
+		int left_index(int index);
+		int right_index(int index);
+		int parent_index(int index);
+		void valid_index(int index);
 
-		Pyramid(int size, T ...);
+		Pyramid(int size, int arr_first, ...);
 		~Pyramid();
 };
 

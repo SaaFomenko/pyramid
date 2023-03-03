@@ -14,7 +14,7 @@ int main()
 
 	Pyramid pyramid(6, 1, 3, 6, 5, 9, 8);
 
-	print_pyramid(pyramid);
+	print_pyramid(pyramid, 0);
 
 	return 0;
 }

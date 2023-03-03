@@ -16,26 +16,23 @@ void print_pyramid(Pyramid& pyramid, int index)
 	{
 		std::cout << index << root_lable << pyramid.root() << std::endl;
 	}
-	else
-	{
-		int left_index = pyramid.left_index(index);
-		if (left_index > 0)
-		{
-			std::cout << pyramid.level(index) << left_lable << 
-				pyramid.from_index(index) << ") " << 
-				pyramid.from_index(left_index) << std::endl;
-			print_pyramid(pyramid, left_index);
-		}
+	
+	int parent_index = index;
+	index = pyramid.left_index(index);
+	
+	std::cout << pyramid.level(parent_index) << left_lable << 
+		pyramid.from_index(parent_index) << ") " << 
+		pyramid.from_index(index) << std::endl;
+	print_pyramid(pyramid, index);
+	
 
-		int right_index = pyramid.right_index(index);
-		if (right_index > 0)
-		{
-			std::cout << pyramid.level(index) << right_lable << 
-				pyramid.from_index(index) << ") " << 
-				pyramid.from_index(right_index) << std::endl;
-			print_pyramid(pyramid, right_index);
-		}
-	}
+	index = pyramid.right_index(index);
+	
+	std::cout << pyramid.level(parent_index) << right_lable << 
+		pyramid.from_index(parent_index) << ") " << 
+		pyramid.from_index(index) << std::endl;
+	print_pyramid(pyramid, index);
+	
 }
 
 Pyramid::Pyramid(int size, int arr_first, ...) : 
@@ -43,6 +40,11 @@ Pyramid::Pyramid(int size, int arr_first, ...) :
 	arr(&arr_first)
 {
 //	arr = &arr_first;
+
+	std::cout << "Исходный массив: ";
+	for (int i = 0; i < _size; ++i)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
 }
 
 Pyramid::~Pyramid()

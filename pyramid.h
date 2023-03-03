@@ -5,7 +5,7 @@
 class Pyramid
 {
 	private:
-		int* arr;
+		int* _arr;
 		int _size;
 
 	public:
@@ -17,7 +17,7 @@ class Pyramid
 		int parent_index(int child_index);
 		int level(int index);
 
-		Pyramid(int size, int arr_first, ...);
+		Pyramid(int* arr, int size);
 		~Pyramid();
 };
 

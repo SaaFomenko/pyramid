@@ -18,47 +18,63 @@ void print_pyramid(Pyramid& pyramid, int index)
 	}
 	
 	int parent_index = index;
-	index = pyramid.left_index(index);
+	int left_index = pyramid.left_index(parent_index);
+	int right_index = pyramid.right_index(parent_index);
+	int child_index[] = {
+		left_index, 
+		right_index,
+	};
+	int size = sizeof(child_index) / sizeof(child_index[0]);
 	
-	std::cout << pyramid.level(parent_index) << left_lable << 
-		pyramid.from_index(parent_index) << ") " << 
-		pyramid.from_index(index) << std::endl;
-	print_pyramid(pyramid, index);
-	
-
-	index = pyramid.right_index(index);
-	
-	std::cout << pyramid.level(parent_index) << right_lable << 
-		pyramid.from_index(parent_index) << ") " << 
-		pyramid.from_index(index) << std::endl;
-	print_pyramid(pyramid, index);
-	
+	for (int i = 0; i < size; ++i)
+	{
+		if (child_index[i] > 0)
+		{
+			const char* lable = i == 0 ? left_lable : right_lable;
+      
+			std::cout << pyramid.level(child_index[i]) << lable << 
+				pyramid.from_index(parent_index) << ") " << 
+				pyramid.from_index(child_index[i]) << std::endl;
+		}
+	}
+		
+	if (left_index > 0)
+	{
+		print_pyramid(pyramid, child_index[left_index]);
+	}
+	if (right_index > 0)
+	{
+		print_pyramid(pyramid, child_index[right_index]);
+	}
 }
 
-Pyramid::Pyramid(int size, int arr_first, ...) : 
-	_size(size),
-	arr(&arr_first)
+Pyramid::Pyramid(int* arr, int size) : 
+	_size(size)
 {
-//	arr = &arr_first;
+	_arr = new int[size];
 
-	std::cout << "Исходный массив: ";
 	for (int i = 0; i < _size; ++i)
-		std::cout << arr[i] << " ";
-	std::cout << std::endl;
+	{
+		_arr[i] = arr[i];
+	}
 }
 
 Pyramid::~Pyramid()
-{}	
+{
+	delete[] _arr;
+	_arr = nullptr;
+}	
 
 int Pyramid::root()
 {
-	return arr[0];
+	return _arr[0];
 }
 
 void Pyramid::valid_index(int index)
 {
-	if (index < 0 || _size >= index)
+	if (index < 0 || _size <= index)
 	{
+		std::cout << "Index: " << index << std::endl;
 		throw "Error, pyramid index fail!";
 	}
 }
@@ -66,7 +82,7 @@ void Pyramid::valid_index(int index)
 int Pyramid::from_index(int index)
 {
 	valid_index(index);
-	return arr[index];
+	return _arr[index];
 }
 
 int Pyramid::left_index(int parent_index)
@@ -75,6 +91,7 @@ int Pyramid::left_index(int parent_index)
 
 	int index = 2 * parent_index + 1;
 
+	std::cout << "Index left: " << index << std::endl;
 	if (index >= _size)	
 		return -1;
 
@@ -87,6 +104,7 @@ int Pyramid::right_index(int parent_index)
 	
 	int index = 2 * parent_index + 2;
 
+	std::cout << "Index right: " << index << std::endl;
 	if (index >= _size)
 		return -1;
 	
@@ -115,5 +133,5 @@ int Pyramid::level(int index)
 		++i;
 	}
 
-	return i + 1;
+	return i;
 }

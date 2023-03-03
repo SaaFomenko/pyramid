@@ -4,35 +4,52 @@
 static const char* root_lable = " root ";
 static const char* left_lable = " left(";
 static const char* right_lable = " right(";
+static const int root_level = 0;
 
-void print_pyramid(Pyramid& pyramid, int size)
+void print_pyramid(Pyramid& pyramid, int index)
 { 
-//	int index = 0;
-	int level = 0;
-	std::cout << level << root_lable << pyramid.root() << std::endl;
-	
-	for (int i = 0; i < size; ++i)
+	if (index >= pyramid.getSize())
 	{
-		int left_index = pyramid.left_index(i);
-		int right_index = pyramid.right_index(i);
-		int child_index[] = {
-			left_index, 
-			right_index,
-		};
-		int size = sizeof(child_index) / sizeof(child_index[0]);
-		
-		for (int j = 0; j < size; ++j)
+		return;
+	}
+
+	if (index == root_level)
+	{
+		std::cout << root_level << root_lable << pyramid.root() << std::endl;
+	}
+	
+	int left_index = pyramid.left_index(index);
+	int right_index = pyramid.right_index(index);
+
+/*	if(left_index < root_level || right_index < root_level)
+	{
+		return;
+	}
+*/
+	int child_index[] = {
+		left_index, 
+		right_index,
+	};
+	int size = sizeof(child_index) / sizeof(child_index[0]);
+	
+	for (int j = 0; j < size; ++j)
+	{
+		if (child_index[j] > 0)
 		{
-			if (child_index[j] > 0)
-			{
-				const char* lable = j == 0 ? left_lable : right_lable;
-        
-				std::cout << pyramid.level(child_index[j]) << lable << 
-					pyramid.from_index(i) << ") " << 
-					pyramid.from_index(child_index[j]) << std::endl;
-			}
+			const char* lable = j == 0 ? left_lable : right_lable;
+      
+			std::cout << pyramid.level(child_index[j]) << lable << 
+				pyramid.from_index(index) << ") " << 
+				pyramid.from_index(child_index[j]) << std::endl;
+		}
+		else
+		{
+			return;
 		}
 	}
+
+	print_pyramid(pyramid, left_index);
+	print_pyramid(pyramid, right_index);
 }
 
 Pyramid::Pyramid(int* arr, int size) : 
@@ -51,6 +68,11 @@ Pyramid::~Pyramid()
 	delete[] _arr;
 	_arr = nullptr;
 }	
+
+int Pyramid::getSize()
+{
+	return _size;
+}
 
 int Pyramid::root()
 {

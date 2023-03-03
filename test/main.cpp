@@ -27,7 +27,7 @@ int main()
 
 	try
 	{
-		print_pyramid(pyramid, size);
+		print_pyramid(pyramid, 0);
 	}
 	catch (const char* err)
 	{

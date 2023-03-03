@@ -9,6 +9,7 @@ class Pyramid
 		int _size;
 
 	public:
+		int getSize();
 		int root();
 		void valid_index(int index);
 		int from_index(int index);
@@ -21,6 +22,6 @@ class Pyramid
 		~Pyramid();
 };
 
-void print_pyramid(Pyramid& pyramid, int size);
+void print_pyramid(Pyramid& pyramid, int index);
 
 #endif

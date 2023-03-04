@@ -21,11 +21,6 @@ void print_pyramid(Pyramid& pyramid, int index)
 	int left_index = pyramid.left_index(index);
 	int right_index = pyramid.right_index(index);
 
-/*	if(left_index < root_level || right_index < root_level)
-	{
-		return;
-	}
-*/
 	int child_index[] = {
 		left_index, 
 		right_index,
@@ -83,7 +78,7 @@ void Pyramid::valid_index(int index)
 {
 	if (index < 0 || _size <= index)
 	{
-//		std::cout << "Index: " << index << std::endl;
+		std::cout << "Index: " << index << std::endl;
 		throw "Error, pyramid index fail!";
 	}
 }
@@ -100,7 +95,7 @@ int Pyramid::left_index(int parent_index)
 
 	int index = 2 * parent_index + 1;
 
-//	std::cout << "Index left: " << index << std::endl;
+	std::cout << "Index left: " << index << std::endl;
 	if (index >= _size)	
 		return -1;
 
@@ -113,7 +108,7 @@ int Pyramid::right_index(int parent_index)
 	
 	int index = 2 * parent_index + 2;
 
-//	std::cout << "Index right: " << index << std::endl;
+	std::cout << "Index right: " << index << std::endl;
 	if (index >= _size)
 		return -1;
 	

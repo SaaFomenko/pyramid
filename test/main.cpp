@@ -23,9 +23,6 @@ int main()
 	int size2 = sizeof(arr2) / sizeof(arr2[0]);
 	int size3 = sizeof(arr3) / sizeof(arr3[0]);
 
-	print_arr(arr1, size1);
-	print_arr(arr2, size2);
-	print_arr(arr3, size3);
 
 	Pyramid pyramid1(arr1, size1);
 	Pyramid pyramid2(arr2, size2);
@@ -33,10 +30,15 @@ int main()
 
 	try
 	{
+		print_arr(arr1, size1);
 		print_pyramid(pyramid1, 0);
 		std::cout << std::endl;
+
+		print_arr(arr2, size2);
 		print_pyramid(pyramid2, 0);
 		std::cout << std::endl;
+
+		print_arr(arr3, size3);
 		print_pyramid(pyramid3, 0);
 		std::cout << std::endl;
 	}

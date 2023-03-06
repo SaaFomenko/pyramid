@@ -21,11 +21,6 @@ void print_pyramid(Pyramid& pyramid, int index)
 	int left_index = pyramid.left_index(index);
 	int right_index = pyramid.right_index(index);
 
-/*	if(left_index < root_level || right_index < root_level)
-	{
-		return;
-	}
-*/
 	int child_index[] = {
 		left_index, 
 		right_index,

@@ -15,6 +15,7 @@ void print_arr(int* arr, int size)
 
 int main()
 {
+	const std::string pyramid_lable = "Пирамида:";
 
 // Test array
 	int arr1[] = { 1, 3, 6, 5, 9, 8 };
@@ -32,14 +33,17 @@ int main()
 	try
 	{
 		print_arr(arr1, size1);
+		std::cout << pyramid_lable << std::endl;
 		print_pyramid(pyramid1);
 		std::cout << std::endl;
 
 		print_arr(arr2, size2);
+		std::cout << pyramid_lable << std::endl;
 		print_pyramid(pyramid2);
 		std::cout << std::endl;
 
 		print_arr(arr3, size3);
+		std::cout << pyramid_lable << std::endl;
 		print_pyramid(pyramid3);
 		std::cout << std::endl;
 	}

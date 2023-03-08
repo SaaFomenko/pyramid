@@ -10,15 +10,15 @@ static const int child_size = 2;
 void print_pyramid(Pyramid& pyramid)
 { 
 	std::cout << root_level << root_lable << pyramid.root() << std::endl;
-
-	int pyramid_size = pyramid.getSize();
-	int child_index[child_size];
 	
+	int pyramid_size = pyramid.getSize();
+  int child_index[child_size];
+
 	for (int i = 0; i < pyramid_size; ++i)
 	{
 		child_index[0] = pyramid.left_index(i);
 		child_index[1] = pyramid.right_index(i);
-		
+
 		for (int j = 0; j < child_size; ++j)
 		{
 			if (child_index[j] > 0)
@@ -48,7 +48,7 @@ Pyramid::~Pyramid()
 {
 	delete[] _arr;
 	_arr = nullptr;
-}	
+}
 
 int Pyramid::getSize()
 {

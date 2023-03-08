@@ -22,6 +22,6 @@ class Pyramid
 		~Pyramid();
 };
 
-void print_pyramid(Pyramid& pyramid, int index);
+void print_pyramid(Pyramid& pyramid);
 
 #endif

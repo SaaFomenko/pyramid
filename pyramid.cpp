@@ -4,47 +4,48 @@
 static const char* root_lable = " root ";
 static const char* left_lable = " left(";
 static const char* right_lable = " right(";
+static const char* negative_warn = "Warning: Index do not can negative!";
+static const char* more_num_warn = "Warning: Index do not can more numbers blocks!";
 static const int root_level = 0;
 
-void print_pyramid(Pyramid& pyramid, int index)
-{ 
-	if (index >= pyramid.getSize())
+void print_block(Pyramid& pyramid, int index)
+{
+	if (index < 0)
 	{
+		std::cout << negative_warn << std::endl;
 		return;
 	}
 
-	if (index == root_level)
+	if (index == 0)
 	{
 		std::cout << root_level << root_lable << pyramid.root() << std::endl;
+		return;
 	}
-	
-	int left_index = pyramid.left_index(index);
-	int right_index = pyramid.right_index(index);
 
-	int child_index[] = {
-		left_index, 
-		right_index,
-	};
-	int size = sizeof(child_index) / sizeof(child_index[0]);
-	
-	for (int j = 0; j < size; ++j)
+	int pyramid_size = pyramid.getSize();
+
+	if (index >= pyramid_size)
 	{
-		if (child_index[j] > 0)
-		{
-			const char* lable = j == 0 ? left_lable : right_lable;
-      
-			std::cout << pyramid.level(child_index[j]) << lable << 
-				pyramid.from_index(index) << ") " << 
-				pyramid.from_index(child_index[j]) << std::endl;
-		}
-		else
-		{
-			return;
-		}
+		std::cout << more_num_warn << std::endl;
+		return;
 	}
 
-	print_pyramid(pyramid, left_index);
-	print_pyramid(pyramid, right_index);
+	int parent_index = pyramid.parent_index(index);
+	const char* lable = (index % 2) == 0 ? right_lable : left_lable;
+
+	std::cout << pyramid.level(index) << lable << 
+		pyramid.from_index(parent_index) << ") " << 
+		pyramid.from_index(index) << std::endl;
+}
+
+void print_pyramid(Pyramid& pyramid)
+{ 
+	int pyramid_size = pyramid.getSize();
+
+	for (int i = 0; i < pyramid_size; ++i)
+	{
+		print_block(pyramid, i);
+	}
 }
 
 Pyramid::Pyramid(int* arr, int size) : 
@@ -62,7 +63,7 @@ Pyramid::~Pyramid()
 {
 	delete[] _arr;
 	_arr = nullptr;
-}	
+}
 
 int Pyramid::getSize()
 {

@@ -23,5 +23,6 @@ class Pyramid
 };
 
 void print_pyramid(Pyramid& pyramid);
+void explorer_pyramid(Pyramid& pyramid, const char* cmd);
 
 #endif

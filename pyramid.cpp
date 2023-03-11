@@ -38,6 +38,32 @@ void print_block(Pyramid& pyramid, int index)
 		pyramid.from_index(index) << std::endl;
 }
 
+void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
+{
+	const char* up_cmd = "up";
+	const char* left_cmd = "left";
+	const char* right_cmd = "right";
+	const char* exit_cmd = "exit";
+	const char* succes = "Ok";
+	const std::string err = "Ошибка! Отсутствует ";
+	const std::string parent_lable = "родитель";
+	const std::string left_lable = "левый потомок";
+	const std::string right_lable = "правый потомок";
+
+	if (cmd == up_cmd)
+	{
+		if (index == 0)
+		{
+			std::cout << err << parent_lable << std::endl;
+			return;
+		}
+
+		index = pyramid.parent_index(index);
+		std::cout << succes << std::endl;
+		return;
+	}
+}
+
 void print_pyramid(Pyramid& pyramid)
 { 
 	int pyramid_size = pyramid.getSize();

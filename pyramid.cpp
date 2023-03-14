@@ -40,6 +40,7 @@ void print_block(Pyramid& pyramid, int index)
 
 void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 {
+	const char* div = ", ";
 	const char* up_cmd = "up";
 	const char* left_cmd = "left";
 	const char* right_cmd = "right";
@@ -49,6 +50,13 @@ void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 	const std::string parent_lable = "родитель";
 	const std::string left_lable = "левый потомок";
 	const std::string right_lable = "правый потомок";
+	const std::string cmd_err = " - Неверно введа команда, для перехода введите: ";
+
+	if (cmd == exit_cmd)
+	{
+		index = -1;
+		return;
+	}
 
 	if (cmd == up_cmd)
 	{
@@ -62,6 +70,41 @@ void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 		std::cout << succes << std::endl;
 		return;
 	}
+
+	if (cmd == right_cmd)
+	{
+		int r = pyramid.right_index(index);
+
+		if (index == -1)
+		{
+			std::cout << err << right_lable << std::endl;
+			return;
+		}
+
+		index = r;
+		std::cout << succes << std::endl;
+		return;
+	}
+
+	if (cmd == left_cmd)
+	{
+		int l = pyramid.left_index(index);
+
+		if (index == -1)
+		{
+			std::cout << err << left_lable << std::endl;
+			return;
+		}
+
+		index = l;
+		std::cout << succes << std::endl;
+		return;
+	}
+
+	std::cout << cmd << cmd_err << std::endl;
+	std::cout << up_cmd << div << right_cmd << div << right_cmd <<
+	 div << exit_cmd << std::endl;
+	return;	
 }
 
 void print_pyramid(Pyramid& pyramid)

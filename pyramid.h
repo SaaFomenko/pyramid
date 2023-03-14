@@ -22,6 +22,7 @@ class Pyramid
 		~Pyramid();
 };
 
+void print_block(Pyramid& pyramidi, int index);
 void print_pyramid(Pyramid& pyramid);
 void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index);
 

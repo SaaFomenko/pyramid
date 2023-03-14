@@ -14,42 +14,41 @@ void print_arr(int* arr, int size)
 int main()
 {
 	const std::string pyramid_lable = "Пирамида:";
+	int index = 0;
+	char cmd[6];
 
 // Test array
-	int arr1[] = { 1, 3, 6, 5, 9, 8 };
-	int arr2[] = { 94, 67, 18, 44, 55, 12, 6, 42 };
-	int arr3[] = { 16, 11, 9, 10, 5, 6, 8, 1, 2, 4 };
+	int arr[] = { 1, 3, 6, 5, 9, 8 };
+//	int arr[] = { 94, 67, 18, 44, 55, 12, 6, 42 };
+//	int arr[] = { 16, 11, 9, 10, 5, 6, 8, 1, 2, 4 };
 
-	int size1 = sizeof(arr1) / sizeof(arr1[0]);
-	int size2 = sizeof(arr2) / sizeof(arr2[0]);
-	int size3 = sizeof(arr3) / sizeof(arr3[0]);
+	int size = sizeof(arr) / sizeof(arr[0]);
 
 
-	Pyramid pyramid1(arr1, size1);
-	Pyramid pyramid2(arr2, size2);
-	Pyramid pyramid3(arr3, size3);
+	Pyramid pyramid(arr, size);
 
 	try
 	{
-		print_arr(arr1, size1);
+		print_arr(arr, size);
 		std::cout << pyramid_lable << std::endl;
-		print_pyramid(pyramid1);
-		std::cout << std::endl;
-
-		print_arr(arr2, size2);
-		std::cout << pyramid_lable << std::endl;
-		print_pyramid(pyramid2);
-		std::cout << std::endl;
-
-		print_arr(arr3, size3);
-		std::cout << pyramid_lable << std::endl;
-		print_pyramid(pyramid3);
+		print_pyramid(pyramid);
 		std::cout << std::endl;
 	}
 	catch (const char* err)
 	{
 		std::cout << err << std::endl;
 	}
+
+	do
+	{
+		std::cout << "Вы находитесь здесь: ";
+		print_block(pyramid, index);
+		
+		std::cout << "Введите команду: ";
+		std::cin >> cmd;
+		explorer_pyramid(pyramid, cmd, index);
+	} 
+	while (index < 0);
 
 	return 0;
 }

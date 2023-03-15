@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string.h>
 #include "pyramid.h"
 
 static const char* root_lable = " root ";
@@ -38,6 +39,11 @@ void print_block(Pyramid& pyramid, int index)
 		pyramid.from_index(index) << std::endl;
 }
 
+bool equal_char(const char* str1, const char* str2)
+{
+	return strcmp(str1, str2) == 0 ? true : false;
+}
+
 void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 {
 	const char* div = ", ";
@@ -52,13 +58,13 @@ void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 	const std::string right_lable = "правый потомок";
 	const std::string cmd_err = " - Неверно введа команда, для перехода введите: ";
 
-	if (cmd == exit_cmd)
+	if (equal_char(cmd, exit_cmd))
 	{
-		index = -1;
+		index = -2;
 		return;
 	}
 
-	if (cmd == up_cmd)
+	if (equal_char(cmd, up_cmd))
 	{
 		if (index == 0)
 		{
@@ -71,11 +77,11 @@ void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 		return;
 	}
 
-	if (cmd == right_cmd)
+	if (equal_char(cmd, right_cmd))
 	{
 		int r = pyramid.right_index(index);
 
-		if (index == -1)
+		if (r == -1)
 		{
 			std::cout << err << right_lable << std::endl;
 			return;
@@ -86,11 +92,11 @@ void explorer_pyramid(Pyramid& pyramid, const char* cmd, int& index)
 		return;
 	}
 
-	if (cmd == left_cmd)
+	if (equal_char(cmd, left_cmd))
 	{
 		int l = pyramid.left_index(index);
 
-		if (index == -1)
+		if (l == -1)
 		{
 			std::cout << err << left_lable << std::endl;
 			return;
@@ -165,7 +171,7 @@ int Pyramid::left_index(int parent_index)
 
 	int index = 2 * parent_index + 1;
 
-	std::cout << "Index left: " << index << std::endl;
+//	std::cout << "Index left: " << index << std::endl;
 	if (index >= _size)	
 		return -1;
 
@@ -178,7 +184,7 @@ int Pyramid::right_index(int parent_index)
 	
 	int index = 2 * parent_index + 2;
 
-	std::cout << "Index right: " << index << std::endl;
+//	std::cout << "Index right: " << index << std::endl;
 	if (index >= _size)
 		return -1;
 	
